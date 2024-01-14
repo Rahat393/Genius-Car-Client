@@ -1,0 +1,41 @@
+li {
+  font-weight: 500;
+}
+
+.button {
+  border: 1.5px solid #ff3811;
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: #ff3811;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.button:hover {
+  color: white;
+  background-color: #ff3811;
+}
+
+.Sbutton {
+  border: 1.5px solid #ff3811;
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: #ff3811;
+  font-weight: 500;
+  font-size: 20px;
+  color: white;
+  background-color: #ff3811;
+}
+
+.Obutton {
+  border: 1.5px solid white;
+  padding: 10px 30px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.Obutton:hover {
+  background-color: #ff3811;
+}
