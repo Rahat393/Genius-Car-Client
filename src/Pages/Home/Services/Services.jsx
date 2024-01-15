@@ -15,9 +15,11 @@ const Services = () => {
     <div>
       <p>length: {services.length}</p>
       <h1 className="text-center text-3xl font-semibold">Our Service Area</h1>
-      {services.map((service) => (
-        <ServicesCard key={service._id} service={service}></ServicesCard>
-      ))}
+      <div className="lg:grid grid-cols-3">
+        {services.map((service) => (
+          <ServicesCard key={service._id} service={service}></ServicesCard>
+        ))}
+      </div>
     </div>
   );
 };
