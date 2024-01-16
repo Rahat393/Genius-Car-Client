@@ -1,7 +1,7 @@
 import React from "react";
 
 const BookingsCard = ({ booking, setBookings, bookings }) => {
-  const { img, date, price, _id } = booking;
+  const { img, date, price, _id, status } = booking;
   const handleDelete = (id) => {
     console.log(id);
     const proceed = confirm("Are you sure you want to delete this ");
@@ -19,6 +19,27 @@ const BookingsCard = ({ booking, setBookings, bookings }) => {
           }
         });
     }
+  };
+
+  const handleUpdate = (id) => {
+    fetch(`http://localhost:5000/bookings/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "confirm" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          const remaining = bookings.filter((booking) => booking._id !== id);
+          const updated = bookings.find((booking) => booking._id === id);
+          updated.status = "confirm";
+          const newBooking = [updated, ...remaining];
+          setBookings(newBooking);
+        }
+      });
   };
   return (
     <tr>
@@ -38,7 +59,13 @@ const BookingsCard = ({ booking, setBookings, bookings }) => {
       </td>
       <td>{price}</td>
       <td>{date}</td>
-      <td>X</td>
+      <td>
+        {status === "confirm" ? (
+          "Confirmed"
+        ) : (
+          <button onClick={() => handleUpdate(_id)}>Please Confirm</button>
+        )}
+      </td>
       <td>
         {" "}
         <button
