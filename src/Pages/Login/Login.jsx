@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,7 +19,9 @@ const Login = () => {
     signIn(email, password)
       .then((res) => {
         console.log(res.user);
-        navigate("/");
+
+        navigate(from, { replace: true });
+        console.log(loggedUser);
       })
       .catch((err) => console.log(err));
   };
@@ -67,6 +72,7 @@ const Login = () => {
                 SignUp
               </Link>{" "}
             </p>
+            <SocialLogin />
           </div>
         </div>
       </div>
